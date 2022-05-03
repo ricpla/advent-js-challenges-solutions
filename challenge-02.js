@@ -1,20 +1,20 @@
+const letter = ' bici coche balón balón  playstation  bici coche peluche ';
+
 function listGifts(letter) {
     let newObject = {};
-    let arrayStrings = [];
-    let finalArray = [];
-    arrayStrings = letter.trim().split(' ');
+    let arrayStrings = letter.trim().replace(/\s+/gi, ' ').split(' ').filter(string => !string.includes('_'));;
 
-    finalArray = arrayStrings.filter(string => !string.includes('_'));
-
-    for (string of finalArray) {
-        if (string in newObject) {
-            ++newObject[string]
+    for (let i = 0; i < arrayStrings.length; i++) {
+        if (newObject.hasOwnProperty(arrayStrings[i])) {
+            ++newObject[arrayStrings[i]]
         } else {
-            newObject[string] = 1;
+            newObject[arrayStrings[i]] = 1;
         }
     }
 
     return newObject;
 }
 
-console.log(listGifts('bici coche balón _playstation bici coche peluche'));
+const result = listGifts(letter);
+
+console.log(result)
